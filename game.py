@@ -119,7 +119,7 @@ class Main_Game():
                         exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_p:
-                        print('game unpausedlol')
+                        print('game unpaused')
                         pause = False
 
                 self.window.fill((169, 169, 169))
