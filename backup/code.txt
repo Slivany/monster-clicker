@@ -1,0 +1,5 @@
+pauseText = utils.getFont(size=96, style="bold").render("Paused", True, utils.black)
+pauseTextRect = pauseText.get_rect()
+pauseTextRect.center = self.window.get_rect().center
+self.window.blit(pauseText, pauseTextRect)
+pygame.display.update()
