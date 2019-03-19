@@ -5,12 +5,14 @@ import utils
 import csv
 import numpy as np
 
-
 # Initialize field variables
 clickMultiplier = 1
-money = 200
+money = 0
+incrementMoney = 0
 item1Cost = 100
 item2Cost = 500
+item3Cost = 50
+item4Cost = 1000
 x = 0
 y = 0
 
@@ -75,6 +77,16 @@ class Main_Game():
         self.icon2_rect = self.icon2.get_rect(
             topleft=((self.surface.get_width() / 1.5), (self.surface.get_height() / 6)))
 
+        self.icon3 = pygame.image.load("icon3.png").convert_alpha()
+        self.icon3 = pygame.transform.rotozoom(self.icon3, 0, 0.5)
+        self.icon3_rect = self.icon3.get_rect(
+            topleft=((self.surface.get_width() / 3.5), (self.surface.get_height() / 2.2)))
+
+        self.icon4 = pygame.image.load("icon4.png").convert_alpha()
+        self.icon4 = pygame.transform.rotozoom(self.icon4, 0, 0.5)
+        self.icon4_rect = self.icon4.get_rect(
+            topleft=((self.surface.get_width() / 1.5), (self.surface.get_height() / 2.2)))
+
         self.startButton = pygame.image.load("startButton.png").convert_alpha()
         self.startButton = pygame.transform.rotozoom(self.startButton, 0, 1)
         self.startButton_rect = self.startButton.get_rect(
@@ -106,28 +118,25 @@ class Main_Game():
         # Our main loops, keeping the game going.
         global clickMultiplier
         global money
+        global item1Cost
         menu = True
         while menu:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        exit()
                 if event.type == pygame.MOUSEBUTTONDOWN and self.exitGameButton_rect.collidepoint(event.pos):
                     exit()
                 if event.type == pygame.MOUSEBUTTONDOWN and self.startButton_rect.collidepoint(event.pos):
                     menu = False
                     self.adventureScene()
                 if event.type == pygame.MOUSEBUTTONDOWN and self.loadSaveButton_rect.collidepoint(event.pos):
-                    clickMultiplier, money = np.loadtxt('save.csv', delimiter=',', unpack=True)
+                    clickMultiplier, money, item1Cost, item3Cost = np.loadtxt('save.csv', delimiter=',', unpack=True)
                     menu = False
                     self.adventureScene()
 
-
                 self.window.fill((255, 255, 255))
                 self.startText = utils.getFont(size=60, style="bold").render("Monster Clicker", True,
-                                                                        utils.black)
+                                                                             utils.black)
                 self.window.blit(self.startText, (self.surface.get_width() / 3.5, self.surface.get_height() / 3.02))
                 self.window.blit(self.startButton, self.startButton_rect)
                 self.window.blit(self.loadSaveButton, self.loadSaveButton_rect)
@@ -135,21 +144,20 @@ class Main_Game():
                 pygame.display.update()
 
     def pause(self):
+        # Function that keeps track of the pause menu
         global clickMultiplier
         global money
+        global item1Cost
         global csv_writer
         pause = True
         while pause:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        exit()
                 if event.type == pygame.MOUSEBUTTONDOWN and self.exitGameButton_rect.collidepoint(event.pos):
                     exit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_p:
+                    if event.key == pygame.K_ESCAPE:
                         print('game unpaused')
                         pause = False
                 if event.type == pygame.MOUSEBUTTONDOWN and self.continueButton_rect.collidepoint(event.pos):
@@ -158,7 +166,7 @@ class Main_Game():
                 if event.type == pygame.MOUSEBUTTONDOWN and self.saveGameButton_rect.collidepoint(event.pos):
                     with open('save.csv', 'w') as savedVariables:
                         csv_writer = csv.writer(savedVariables)
-                        csv_writer.writerow([clickMultiplier, money])
+                        csv_writer.writerow([clickMultiplier, money, item1Cost, item3Cost])
                         savedVariables.close()
 
                 self.window.fill((169, 169, 169))
@@ -171,21 +179,19 @@ class Main_Game():
                 pygame.display.update()
 
     def adventureScene(self):
+        # Function that keeps track of the main adventure menu
         global money
+        global incrementMoney
         global clickMultiplier
         mainGame = True
         while mainGame:
-            pygame.time.delay(100)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_p:
+                    if event.key == pygame.K_ESCAPE:
                         print('game paused')
                         self.pause()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        exit()
                 if event.type == pygame.MOUSEBUTTONDOWN and self.monster_rect.collidepoint(event.pos):
                     print(money)
                     money = money + clickMultiplier
@@ -193,6 +199,7 @@ class Main_Game():
                     mainGame = False
                     self.gameShop()
 
+            money += incrementMoney
             self.window.blit(self.forest, self.forest_rect)
             self.window.blit(self.monster, self.monster_rect)
             self.window.blit(self.shopButton, self.shopButton_rect)
@@ -202,9 +209,13 @@ class Main_Game():
             pygame.display.flip()
 
     def gameShop(self):
+        # Function that keeps track of the game shop menu
         global item1Cost
         global item2Cost
+        global item3Cost
+        global item4Cost
         global money
+        global incrementMoney
         global clickMultiplier
         shop = True
         while shop:
@@ -213,34 +224,76 @@ class Main_Game():
                 if event.type == pygame.QUIT:
                     exit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_p:
+                    if event.key == pygame.K_ESCAPE:
                         print('game paused')
                         self.pause()
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        exit()
                 if event.type == pygame.MOUSEBUTTONDOWN and self.backButton_rect.collidepoint(event.pos):
                     shop = False
                     self.adventureScene()
-                if event.type == pygame.MOUSEBUTTONDOWN and self.icon1_rect.collidepoint(event.pos) and money >= 100:
+                if event.type == pygame.MOUSEBUTTONDOWN and self.icon1_rect.collidepoint(
+                        event.pos) and money >= item1Cost:
                     clickMultiplier = clickMultiplier + 1
                     money = money - item1Cost
-                if event.type == pygame.MOUSEBUTTONDOWN and self.icon2_rect.collidepoint(event.pos) and money >= 500:
+                if event.type == pygame.MOUSEBUTTONDOWN and self.icon2_rect.collidepoint(
+                        event.pos) and money >= item2Cost:
                     item1Cost = item1Cost * 0.90
+                    item3Cost = item3Cost * 0.90
                     money = money - item2Cost
+                if event.type == pygame.MOUSEBUTTONDOWN and self.icon3_rect.collidepoint(
+                        event.pos) and money >= item3Cost:
+                    incrementMoney = incrementMoney + 0.01
+                    money = money - item3Cost
+                if event.type == pygame.MOUSEBUTTONDOWN and self.icon4_rect.collidepoint(
+                        event.pos) and money >= item4Cost:
+                    money = money - item4Cost
 
+            money += incrementMoney
             self.window.blit(self.brickwall, self.brickwall_rect)
             self.window.blit(self.shopkeeper, self.shopkeeper_rect)
             self.window.blit(self.table, self.table_rect)
             self.window.blit(self.backButton, self.backButton_rect)
+
+            # Icon1 configuration
             self.window.blit(self.icon1, self.icon1_rect)
+            self.icon1Text = utils.getFont(size=20, style="bold").render("Extra Clicks", True,
+                                                                         utils.black)
+            self.window.blit(self.icon1Text, (self.surface.get_width() / 3.95, self.surface.get_height() / 7.17))
+            self.icon1TextCost = utils.getFont(size=22, style="").render(str(int(item1Cost)) + '$', True,
+                                                                         utils.black)
+            self.window.blit(self.icon1TextCost, (self.surface.get_width() / 3.43, self.surface.get_height() / 4.1))
+
+            # Icon2 configuration
             self.window.blit(self.icon2, self.icon2_rect)
+            self.icon2Text = utils.getFont(size=20, style="bold").render("Cost Down", True,
+                                                                             utils.black)
+            self.window.blit(self.icon2Text, (self.surface.get_width() / 1.55, self.surface.get_height() / 7.17))
+            self.icon2TextCost = utils.getFont(size=22, style="").render(str(int(item2Cost)) + '$', True,
+                                                                         utils.black)
+            self.window.blit(self.icon2TextCost, (self.surface.get_width() / 1.489, self.surface.get_height() / 4.1))
+
+            # Icon3 configuration
+            self.window.blit(self.icon3, self.icon3_rect)
+            self.icon3Text = utils.getFont(size=20, style="bold").render("Passive Income", True,
+                                                                         utils.black)
+            self.window.blit(self.icon3Text, (self.surface.get_width() / 4.05, self.surface.get_height() / 2.35))
+            self.icon3TextCost = utils.getFont(size=22, style="").render(str(int(item3Cost)) + '$', True,
+                                                                         utils.black)
+            self.window.blit(self.icon3TextCost, (self.surface.get_width() / 3.38, self.surface.get_height() / 1.88))
+
+            # Icon4 configuration
+            self.window.blit(self.icon4, self.icon4_rect)
+            self.icon4Text = utils.getFont(size=20, style="bold").render("Next Level", True,
+                                                                         utils.black)
+            self.window.blit(self.icon4Text, (self.surface.get_width() / 1.56, self.surface.get_height() / 2.348))
+            self.icon4TextCost = utils.getFont(size=22, style="").render(str(int(item4Cost)) + '$', True,
+                                                                         utils.black)
+            self.window.blit(self.icon4TextCost, (self.surface.get_width() / 1.499, self.surface.get_height() / 1.88))
+
             self.scoreText = self.myFont.render("Your money = " + str(int(money)) + "$", 1, (255, 255, 255))
             self.window.blit(self.scoreText, (self.surface.get_width() / 80, self.surface.get_height() / 70))
             pygame.display.update()
-
         pygame.quit()
 
-
+# Calls our game to start
 game = Main_Game()
 game.startMenu()

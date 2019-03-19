@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="bacf14e3-361f-440a-ade8-d37d98cae83a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backup/buttons.psd" beforeDir="false" afterPath="$PROJECT_DIR$/backup/buttons.psd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backup/icons.psd" beforeDir="false" afterPath="$PROJECT_DIR$/backup/icons.psd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/icon2.png" beforeDir="false" afterPath="$PROJECT_DIR$/icon2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save.csv" beforeDir="false" afterPath="$PROJECT_DIR$/save.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="228" column="48" selection-start-line="228" selection-start-column="48" selection-end-line="228" selection-end-column="48" />
+            <state relative-caret-position="137">
+              <caret line="277" column="63" lean-forward="true" selection-start-line="277" selection-start-column="63" selection-end-line="277" selection-end-column="63" />
               <folding>
                 <element signature="e#19#32#0" expanded="true" />
               </folding>
@@ -30,7 +31,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="238">
               <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
             </state>
           </provider>
@@ -47,11 +48,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pos</find>
-      <find>m</find>
-      <find>blit</find>
-      <find>y</find>
-      <find>class</find>
       <find>monster_rec</find>
       <find>start</find>
       <find>running</find>
@@ -70,13 +66,18 @@
       <find>shopb</find>
       <find>global</find>
       <find>pausetext</find>
-      <find>starttext</find>
       <find>myfont</find>
       <find>style</find>
       <find>gamesaveb</find>
       <find>gamesave</find>
       <find>csv_wr</find>
       <find>str</find>
+      <find>icon</find>
+      <find>incremen</find>
+      <find>passivein</find>
+      <find>item1cost</find>
+      <find>starttext</find>
+      <find>icon1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -249,13 +250,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13681428" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.28045326" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28045326" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39943343" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -294,20 +296,23 @@
     <entry file="file://$PROJECT_DIR$/shopkeeper.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="228" column="48" selection-start-line="228" selection-start-column="48" selection-end-line="228" selection-end-column="48" />
-          <folding>
-            <element signature="e#19#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/save.csv">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="238">
           <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="277" column="63" lean-forward="true" selection-start-line="277" selection-start-column="63" selection-end-line="277" selection-end-column="63" />
+          <folding>
+            <element signature="e#19#32#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
